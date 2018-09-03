@@ -5,5 +5,11 @@
 </head>
 <body>
 <div>Hello {{name}}</div>
+<form metod="post" action="addNewRemote">
+    <button type="submit">Добавить новую ардуину</button>
+</form>
+{{#arduinos}}
+<div>{{name}}</div>
+{{/arduinos}}
 </body>
 </html>

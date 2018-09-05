@@ -10,10 +10,21 @@ public class RemoteArduino {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
-
     private String name;
-
     private String addres;
+
+    RemoteArduino(){}
+
+    public RemoteArduino(int id, String name, String addres) {
+        this.id = id;
+        this.name = name;
+        this.addres = addres;
+    }
+
+    public RemoteArduino(String name, String addres){
+        this.addres = addres;
+        this.name = name;
+    }
 
     public Integer getId() {
         return id;
@@ -38,6 +49,4 @@ public class RemoteArduino {
     public void setaddres(String adress) {
         this.addres = addres;
     }
-
-
 }

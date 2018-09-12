@@ -6,12 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
+
 @Component
 public class ScheduledTasks {
+
     @Autowired
     private TempSensorValueRepository tempSensorValueRepository;
 
-    @Scheduled(fixedRate = 500)//900000)
+    @Scheduled(fixedRate = 900000)//900000)
     public void getSensorData() {
         WebResouces resouces = new WebResouces();
         TempSensorValue sensorValue = resouces.getTempSensorVallue();

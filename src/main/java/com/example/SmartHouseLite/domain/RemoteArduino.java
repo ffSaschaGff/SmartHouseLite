@@ -13,7 +13,7 @@ import java.net.URL;
 @Entity // This tells Hibernate to make a table out of this class
 public class RemoteArduino {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
     private String addres;

@@ -1,19 +1,22 @@
 package com.example.SmartHouseLite.domain;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import java.sql.Timestamp;
 
+@Entity
 public class TempSensorValue {
+
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private Timestamp date;
-    private double tempeture;
-    private double pressure;
-    private double humidity;
+    private Double tempeture;
+    private Double pressure;
+    private Double humidity;
 
     public Integer getId() {
         return id;

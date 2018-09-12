@@ -4,6 +4,7 @@ import com.example.SmartHouseLite.domain.TempSensorValue;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Component;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -16,6 +17,7 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.util.Date;
+
 
 public class WebResouces {
     private static final String USER_AGENT = "Mozilla/5.0";

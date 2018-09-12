@@ -4,6 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class RemoteArduino {
@@ -48,5 +53,31 @@ public class RemoteArduino {
 
     public void setaddres(String adress) {
         this.addres = addres;
+    }
+
+    public void turnSwitch() {
+        try {
+            URL myurl=new URL("http://"+this.addres+"/gpio5/1");
+            HttpURLConnection  con = (HttpURLConnection) myurl.openConnection();
+
+            con.setRequestMethod("GET");
+
+            StringBuilder content;
+
+            try (BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()))) {
+
+                String line;
+                content = new StringBuilder();
+
+                while ((line = in.readLine()) != null) {
+                    content.append(line);
+                    content.append(System.lineSeparator());
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

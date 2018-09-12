@@ -94,4 +94,16 @@ public class RequestController {
         return new ModelAndView("redirect:/index", model);
     }
 
+    @PostMapping("turnSwitch")
+    public ModelAndView turnSwitch(@RequestParam(value = "id") String id, ModelMap model) {
+        model.addAttribute("attribute", "redirectWithRedirectPrefix");
+        if (!id.equals("null")) {
+            Optional<RemoteArduino> arduino = remoteArduino.findById(Integer.parseInt(id));
+            if (arduino.isPresent()) {
+                arduino.get().turnSwitch();
+            }
+        }
+        return new ModelAndView("redirect:/index", model);
+    }
+
 }

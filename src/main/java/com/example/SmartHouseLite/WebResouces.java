@@ -29,6 +29,9 @@ public class WebResouces {
         }
     }
 
+    public void turnSonoffSwitch(String addres) {
+    }
+
     public TempSensorValue getTempSensorVallue() {
         try {
             String data = sendGet(new URL(TEMP_SENSOR_URL));
@@ -70,7 +73,7 @@ public class WebResouces {
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
             String inputLine;
-            StringBuffer response = new StringBuffer();
+            StringBuilder response = new StringBuilder();
 
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
@@ -108,7 +111,7 @@ public class WebResouces {
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
             String inputLine;
-            StringBuffer response = new StringBuffer();
+            StringBuilder response = new StringBuilder();
 
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);

@@ -9,9 +9,14 @@
 </style>
 <body>
 <div class="rootdiv">
+    {{#sonoffs}}
+    <form class="lineButtons" method="post" action="turnSwitch">
+        <button class="fromButtons" type="submit" title="{{name}}" name="id" value="{{id}}">A</button>
+    </form>
+    {{/sonoffs}}
     {{#arduinos}}
     <form class="lineButtons" method="post" action="turnSwitch">
-    <button class="fromButtons" type="submit" title="{{name}}" name="id" value="{{id}}">V</button>
+    <button class="fromButtons" type="submit" title="{{name}}" name="id" value="{{id}}">A</button>
     </form>
     {{/arduinos}}
     <form class="lineButtons" method="get" action="addNew">
@@ -34,11 +39,13 @@
     Влажность: {{humidity}}<br>
 </div>
 <div class="rootdiv">
+    Время сервера: {{currentTime}}<br>
     Будильник<br>
     <form method="post" action="setAlarm">
-    <input size="1" max="0" min="23" type="number" name="hour" value="{{hour}}">:
-    <input size="1" max="0" min="59" type="number" name="minute" value="{{minute}}">
-    <button type="submit">Записать</button>
+        <input size="1" min="0" max="23" type="number" name="hour" value="{{hour}}">:
+        <input size="1" min="0" max="59" type="number" name="minute" value="{{minute}}">
+        <input type="checkbox" name="isOn" {{alarmIsCheced}}>
+        <button type="submit">Записать</button>
     </form>
     </div>
 </body>

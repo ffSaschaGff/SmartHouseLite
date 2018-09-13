@@ -19,7 +19,7 @@ import java.util.Date;
 
 public class WebResouces {
     private static final String USER_AGENT = "Mozilla/5.0";
-    private static final String TEMP_SENSOR_URL = "192.168.1.199/getbmp280";
+    private static final String TEMP_SENSOR_URL = "http://192.168.1.199/getbmp280";
 
     public void turnArduinoSwitch(String addres) {
         try {

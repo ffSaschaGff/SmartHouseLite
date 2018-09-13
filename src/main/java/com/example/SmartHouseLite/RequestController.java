@@ -3,9 +3,11 @@ package com.example.SmartHouseLite;
 import com.example.SmartHouseLite.domain.Alarm;
 import com.example.SmartHouseLite.domain.RemoteArduino;
 import com.example.SmartHouseLite.domain.RemoteSonoff;
+import com.example.SmartHouseLite.domain.TempSensorValue;
 import com.example.SmartHouseLite.repossitory.AlarmRepository;
 import com.example.SmartHouseLite.repossitory.RemoteArduinoRepository;
 import com.example.SmartHouseLite.repossitory.RemoteSonoffRepository;
+import com.example.SmartHouseLite.repossitory.TempSensorValueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,6 +29,8 @@ public class RequestController {
     private RemoteSonoffRepository remoteSonoffRepository;
     @Autowired
     private AlarmRepository alarmRepository;
+    @Autowired
+    private TempSensorValueRepository tempSensorValueRepository;
 
     @GetMapping("index")
     public String index(Map<String, Object> model) {
@@ -39,9 +43,16 @@ public class RequestController {
             model.put("minute", alarm.getMinute());
             model.put("alarmIsCheced", alarm.getEnabled() ? "checked": "");
         }
+        Iterable<TempSensorValue> temps = tempSensorValueRepository.getAllByDate();
         model.put("tempeture", "");
         model.put("pressure", "");
         model.put("humidity", "");
+        for (TempSensorValue tempSensorValue: temps) {
+            model.put("tempeture", tempSensorValue.getTempeture());
+            model.put("pressure", tempSensorValue.getPressure());
+            model.put("humidity", tempSensorValue.getHumidity());
+        }
+
         model.put("tempetureOut", "");
         model.put("pressureOut", "");
         model.put("humidityOut", "");

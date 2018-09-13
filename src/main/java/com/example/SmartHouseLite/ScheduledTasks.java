@@ -15,7 +15,7 @@ public class ScheduledTasks {
     @Autowired
     private AlarmRepository alarmRepository;
 
-    @Scheduled(fixedRate = 900000)//900000)
+    @Scheduled(fixedRate = 60000)//900000)
     public void getSensorData() {
         WebResouces resouces = new WebResouces();
         TempSensorValue sensorValue = resouces.getTempSensorVallue();

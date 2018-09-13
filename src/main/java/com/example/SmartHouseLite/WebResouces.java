@@ -4,8 +4,6 @@ import com.example.SmartHouseLite.domain.TempSensorValue;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.stereotype.Component;
-
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -22,6 +20,14 @@ import java.util.Date;
 public class WebResouces {
     private static final String USER_AGENT = "Mozilla/5.0";
     private static final String TEMP_SENSOR_URL = "192.168.1.199/getbmp280";
+
+    public void turnArduinoSwitch(String addres) {
+        try {
+            sendGet(new URL("http://"+addres+"/gpio5/1"));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public TempSensorValue getTempSensorVallue() {
         try {
@@ -47,7 +53,7 @@ public class WebResouces {
         }
     }
 
-    private String sendGet(URL url) {
+    public String sendGet(URL url) {
         try {
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
@@ -82,7 +88,7 @@ public class WebResouces {
         }
     }
 
-    private String sendPost(URL url, String body) {
+    public String sendPost(URL url, String body) {
         try {
             HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
 

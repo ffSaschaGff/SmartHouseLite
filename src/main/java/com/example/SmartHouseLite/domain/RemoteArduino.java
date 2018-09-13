@@ -1,5 +1,7 @@
 package com.example.SmartHouseLite.domain;
 
+import com.example.SmartHouseLite.WebResouces;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -56,28 +58,7 @@ public class RemoteArduino {
     }
 
     public void turnSwitch() {
-        try {
-            URL myurl=new URL("http://"+this.addres+"/gpio5/1");
-            HttpURLConnection  con = (HttpURLConnection) myurl.openConnection();
-
-            con.setRequestMethod("GET");
-
-            StringBuilder content;
-
-            try (BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()))) {
-
-                String line;
-                content = new StringBuilder();
-
-                while ((line = in.readLine()) != null) {
-                    content.append(line);
-                    content.append(System.lineSeparator());
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        WebResouces webResouces = new WebResouces();
+        webResouces.turnArduinoSwitch(this.addres);
     }
 }

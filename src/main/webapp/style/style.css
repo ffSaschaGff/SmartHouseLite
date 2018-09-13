@@ -1,11 +1,8 @@
-*: {
-color: #FFFFFF;
-}
 body {
-	background-color: #A67D00;
+	background-color: #bbb;
 }
 .rootdiv{
-	background-color: #A66000;
+	background-color: #ddd;
 	padding: 5px;
 	margin: auto;
 	margin-top: 10px;
@@ -13,11 +10,10 @@ body {
 	border-radius: 5px;
 }
 button{ 
-	background-color: #FF7940;
-	border-color: #A63100;
+	background-color: #999;
+	border-color: #777;
 	border-radius: 3px;
-	color: #000000;
 }
 button:hover {
-	background-color: #FF9D73;
+	background-color: #aaa;
 }

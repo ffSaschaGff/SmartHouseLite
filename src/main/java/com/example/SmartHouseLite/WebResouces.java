@@ -53,7 +53,7 @@ public class WebResouces {
         }
     }
 
-    public String sendGet(URL url) {
+    private String sendGet(URL url) {
         try {
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
 

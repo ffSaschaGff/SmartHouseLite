@@ -9,29 +9,36 @@
 </style>
 <body>
 <div class="rootdiv">
-{{#arduinos}}
-<form class="lineButtons" method="post" action="turnSwitch">
-<button class="fromButtons" type="submit" title="{{name}}" name="id" value="{{id}}">V</button>
-</form>
-{{/arduinos}}
-<form class="lineButtons" method="get" action="addNew">
-<button class="fromButtons" type="submit" >+</button>
-</form>
-<form class="lineButtons" method="get" action="editSwitch">
-<button class="fromButtons" type="submit" title="Редактировать">...</button>
-</form> 
+    {{#arduinos}}
+    <form class="lineButtons" method="post" action="turnSwitch">
+    <button class="fromButtons" type="submit" title="{{name}}" name="id" value="{{id}}">V</button>
+    </form>
+    {{/arduinos}}
+    <form class="lineButtons" method="get" action="addNew">
+    <button class="fromButtons" type="submit" >+</button>
+    </form>
+    <form class="lineButtons" method="get" action="editSwitch">
+    <button class="fromButtons" type="submit" title="Редактировать">...</button>
+    </form>
 </div>
 <div class="rootdiv">
-Температура: {{tempeture}}<br>
-Давление: {{pressure}}<br>
-Влажность: {{humidity}}<br>
+    <b>Снаружи</b><br>
+    Температура: {{tempetureOut}}<br>
+    Давление: {{pressureOut}}<br>
+    Влажность: {{humidityOut}}<br>
 </div>
 <div class="rootdiv">
-Будильник<br>
-<form method="post" action="setAlarm">
-<input size="1" max="0" min="23" type="number" name="hour" value="{{hour}}">:
-<input size="1" max="0" min="59" type="number" name="minute" value="{{minute}}">
-<button type="submit">Записать</button>
-</form>
+    <b>Внутри</b><br>
+    Температура: {{tempeture}}<br>
+    Давление: {{pressure}}<br>
+    Влажность: {{humidity}}<br>
 </div>
+<div class="rootdiv">
+    Будильник<br>
+    <form method="post" action="setAlarm">
+    <input size="1" max="0" min="23" type="number" name="hour" value="{{hour}}">:
+    <input size="1" max="0" min="59" type="number" name="minute" value="{{minute}}">
+    <button type="submit">Записать</button>
+    </form>
+    </div>
 </body>

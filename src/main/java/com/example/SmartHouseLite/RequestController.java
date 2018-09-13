@@ -23,6 +23,9 @@ public class RequestController {
         model.put("tempeture", "");
         model.put("pressure", "");
         model.put("humidity", "");
+        model.put("tempetureOut", "");
+        model.put("pressureOut", "");
+        model.put("humidityOut", "");
         model.put("hour", "");
         model.put("minute", "");
         Iterable<RemoteArduino> arduinos = remoteArduino.findAll();

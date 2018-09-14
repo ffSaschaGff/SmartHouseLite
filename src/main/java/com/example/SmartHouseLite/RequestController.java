@@ -146,9 +146,11 @@ public class RequestController {
                                  @RequestParam(value = "minute") String sMinute,
                                  @RequestParam(value = "isOn", defaultValue = "off") String sIsOn,
                                  ModelMap model) {
-        Alarm alarm = new Alarm(Integer.parseInt(sMinute),Integer.parseInt(sHour),sIsOn.equals("on"));
-        alarm.setLastDay("");
-        alarmRepository.save(alarm);
+        synchronized (Application.class) {
+            Alarm alarm = new Alarm(Integer.parseInt(sMinute), Integer.parseInt(sHour), sIsOn.equals("on"));
+            alarm.setLastDay("");
+            alarmRepository.save(alarm);
+        }
         return new ModelAndView("redirect:/index", model);
     }
 

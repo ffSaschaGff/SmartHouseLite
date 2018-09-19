@@ -14,6 +14,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
@@ -131,14 +132,26 @@ public class RequestController {
         return new ModelAndView("redirect:/index", model);
     }
 
-    @PostMapping("turnSwitch")
-    public ModelAndView turnSwitch(@RequestParam(value = "id") String id, ModelMap model) {
+    @PostMapping("turnSwitchArduino")
+    @ResponseBody
+    public String turnSwitchArduino(@RequestParam(value = "id") String id, ModelMap model) {
         model.addAttribute("attribute", "redirectWithRedirectPrefix");
         if (!id.equals("null")) {
             Optional<RemoteArduino> arduino = remoteArduinoRepository.findById(Integer.parseInt(id));
             arduino.ifPresent(RemoteArduino::turnSwitch);
         }
-        return new ModelAndView("redirect:/index", model);
+        return "{\"status\":\"ok\"}";
+    }
+
+    @PostMapping("turnSwitchSonoff")
+    @ResponseBody
+    public String turnSwitchSonoff(@RequestParam(value = "id") String id, ModelMap model) {
+        model.addAttribute("attribute", "redirectWithRedirectPrefix");
+        if (!id.equals("null")) {
+            Optional<RemoteSonoff> sonoff = remoteSonoffRepository.findById(Integer.parseInt(id));
+            sonoff.ifPresent(RemoteSonoff::turnSwitch);
+        }
+        return "{\"status\":\"ok\"}";
     }
 
     @PostMapping("setAlarm")

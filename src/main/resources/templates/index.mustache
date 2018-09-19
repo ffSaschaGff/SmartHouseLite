@@ -7,17 +7,19 @@
     display: inline-block;
 }
 </style>
+<script src="script/XmlHttp.js">
+</script>
 <body>
 <div class="rootdiv">
     {{#sonoffs}}
-    <form class="lineButtons" method="post" action="turnSwitch">
-        <button class="fromButtons" type="submit" title="{{name}}" name="id" value="{{id}}">A</button>
-    </form>
+    <!-- <form class="lineButtons" method="post" action="turnSwitch"> -->
+        <button onclick="turnSwitchSonoff(this)" class="fromButtons" type="submit" title="{{name}}" name="id" value="{{id}}">A</button>
+    <!-- </form> -->
     {{/sonoffs}}
     {{#arduinos}}
-    <form class="lineButtons" method="post" action="turnSwitch">
-    <button class="fromButtons" type="submit" title="{{name}}" name="id" value="{{id}}">A</button>
-    </form>
+    <!-- <form class="lineButtons" method="post" action="turnSwitch"> -->
+    <button onclick="turnSwitchArduino(this)" class="fromButtons" type="submit" title="{{name}}" name="id" value="{{id}}">A</button>
+    <!-- </form> -->
     {{/arduinos}}
     <form class="lineButtons" method="get" action="addNew">
     <button class="fromButtons" type="submit" >+</button>

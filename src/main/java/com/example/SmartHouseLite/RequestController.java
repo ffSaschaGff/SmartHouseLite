@@ -54,10 +54,6 @@ public class RequestController {
             model.put("humidity", tempSensorValue.getHumidity());
         }
 
-        model.put("tempetureOut", "");
-        model.put("pressureOut", "");
-        model.put("humidityOut", "");
-
         Iterable<RemoteArduino> arduinos = remoteArduinoRepository.findAll();
         model.put("arduinos", arduinos);
         Iterable<RemoteSonoff> sonoffs = remoteSonoffRepository.findAll();

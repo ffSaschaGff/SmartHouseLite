@@ -11,6 +11,7 @@ public class Alarm {
     private Integer hour;
     private Boolean enabled;
     private String lastDay;
+    private Boolean isActive;
 
     public Alarm() {}
 
@@ -60,5 +61,13 @@ public class Alarm {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 }

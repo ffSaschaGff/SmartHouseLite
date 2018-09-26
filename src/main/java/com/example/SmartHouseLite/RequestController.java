@@ -163,4 +163,15 @@ public class RequestController {
         return new ModelAndView("redirect:/index", model);
     }
 
+    @GetMapping("turnAlarmsOff")
+    @ResponseBody
+    public String turnAlarmsOff() {
+        Iterable<Alarm> alarms = alarmRepository.getAllActive();
+        for (Alarm alarm: alarms) {
+            alarm.setActive(false);
+            alarmRepository.save(alarm);
+        }
+        return "{\"status\":\"ok\"}";
+    }
+
 }

@@ -15,6 +15,20 @@
     return xmlhttp;
   }
 
+  function turnAlarmsOff() {
+    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+            xmlhttp.open('GET', 'turnAlarmsOff', true); // Открываем асинхронное соединение
+            xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+            xmlhttp.send();//id=" + encodeURIComponent(element.value)); // Отправляем POST-запрос
+            xmlhttp.onreadystatechange = function() { // Ждём ответа от сервера
+              if (xmlhttp.readyState == 4) { // Ответ пришёл
+                if(xmlhttp.status == 200) { // Сервер вернул код 200 (что хорошо)
+                  alarm('ok'); // Выводим ответ сервера
+                }
+              }
+            };
+  }
+
   function turnSwitchArduino(element) {
     //alert(element.value);
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP

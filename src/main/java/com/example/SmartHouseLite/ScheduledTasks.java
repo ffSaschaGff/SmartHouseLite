@@ -9,6 +9,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Component
 public class ScheduledTasks {
@@ -39,9 +40,10 @@ public class ScheduledTasks {
                 if (alarm.getEnabled() && !alarm.getLastDay().equals(formatText.format(date))) {
                     if (alarm.getHour() < Integer.parseInt(formatHour.format(date)) ||
                             (alarm.getHour() == Integer.parseInt(formatHour.format(date)) && alarm.getMinute() <= Integer.parseInt(formatMin.format(date)))) {
-                        makeAlarm();
+                        alarm.setActive(true);
                         alarm.setLastDay(formatText.format(date));
                         alarmRepository.save(alarm);
+                        makeAlarm();
                     }
                 }
             }
@@ -49,6 +51,12 @@ public class ScheduledTasks {
     }
 
     private void makeAlarm() {
-        System.out.println("alarm!");
+        Iterable<Alarm> alarms = null;
+        int i = 0;
+        do {
+            i++;
+            System.out.println("alarm!"+i);
+            alarms = alarmRepository.getAllActive();
+        } while (!((List<Alarm>) alarms).isEmpty());
     }
 }

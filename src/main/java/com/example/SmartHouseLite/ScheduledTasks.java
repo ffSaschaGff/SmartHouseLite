@@ -7,6 +7,9 @@ import com.example.SmartHouseLite.repossitory.TempSensorValueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -43,20 +46,11 @@ public class ScheduledTasks {
                         alarm.setActive(true);
                         alarm.setLastDay(formatText.format(date));
                         alarmRepository.save(alarm);
-                        makeAlarm();
+                        WebResouces webResouces = new WebResouces();
+                        webResouces.turnAlarmOn();
                     }
                 }
             }
         }
-    }
-
-    private void makeAlarm() {
-        Iterable<Alarm> alarms = null;
-        int i = 0;
-        do {
-            i++;
-            System.out.println("alarm!"+i);
-            alarms = alarmRepository.getAllActive();
-        } while (!((List<Alarm>) alarms).isEmpty());
     }
 }

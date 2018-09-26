@@ -4,6 +4,8 @@ import com.example.SmartHouseLite.domain.TempSensorValue;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.xml.internal.ws.server.ServerRtException;
+
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -20,10 +22,27 @@ import java.util.Date;
 public class WebResouces {
     private static final String USER_AGENT = "Mozilla/5.0";
     private static final String TEMP_SENSOR_URL = "http://192.168.1.199/getbmp280";
+    private static final String ALARM_URL = "http://192.168.1.199/alarm/";
 
     public void turnArduinoSwitch(String addres) {
         try {
             sendGet(new URL("http://"+addres+"/gpio5/1"));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void turnAlarmOn() {
+        try {
+            sendGet(new URL(ALARM_URL+"on"));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void turnAlarmOff() {
+        try {
+            sendGet(new URL(ALARM_URL+"off"));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

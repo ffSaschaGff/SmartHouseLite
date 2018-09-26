@@ -170,6 +170,8 @@ public class RequestController {
         for (Alarm alarm: alarms) {
             alarm.setActive(false);
             alarmRepository.save(alarm);
+            WebResouces webResouces = new WebResouces();
+            webResouces.turnAlarmOff();
         }
         return "{\"status\":\"ok\"}";
     }

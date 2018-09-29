@@ -13,7 +13,7 @@
     width: 148px;
 }
 </style>
-<script src="script/XmlHttp.js">
+<script src="script/index.js">
 </script>
 <body>
 <div class="rootdiv">
@@ -43,6 +43,7 @@
     Температура: {{tempeture}}<br>
     Давление: {{pressure}}<br>
     Влажность: {{humidity}}<br>
+    <canvas id="tSensorCanvas" onclick="fillTempetureCanvas()" width="300" height="200" title=""></canvas>
 </div>
 <div class="rootdiv">
     <button onclick="turnAlarmsOff()" type="submit">*</button><br>
@@ -55,4 +56,5 @@
         <button type="submit">Записать</button>
     </form>
     </div>
+    <script>fillTempetureCanvas();</script>
 </body>

@@ -9,5 +9,9 @@ import java.util.List;
 @Repository
 public interface TempSensorValueRepository  extends CrudRepository<TempSensorValue, Integer> {
     @Query(value = "select * from temp_sensor_value as T order by T.date desc limit 1", nativeQuery = true)
-    List<TempSensorValue> getAllByDate();
+    List<TempSensorValue> getFirstByDate();
+
+    @Query(value = "select * from temp_sensor_value as T order by T.date desc limit 500", nativeQuery = true)
+    List<TempSensorValue> get500FirstByDate();
+
 }

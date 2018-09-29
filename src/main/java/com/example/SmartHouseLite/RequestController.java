@@ -8,6 +8,11 @@ import com.example.SmartHouseLite.repossitory.AlarmRepository;
 import com.example.SmartHouseLite.repossitory.RemoteArduinoRepository;
 import com.example.SmartHouseLite.repossitory.RemoteSonoffRepository;
 import com.example.SmartHouseLite.repossitory.TempSensorValueRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -44,7 +49,7 @@ public class RequestController {
             model.put("minute", alarm.getMinute());
             model.put("alarmIsCheced", alarm.getEnabled() ? "checked": "");
         }
-        Iterable<TempSensorValue> temps = tempSensorValueRepository.getAllByDate();
+        Iterable<TempSensorValue> temps = tempSensorValueRepository.getFirstByDate();
         model.put("tempeture", "");
         model.put("pressure", "");
         model.put("humidity", "");
@@ -174,6 +179,37 @@ public class RequestController {
             webResouces.turnAlarmOff();
         }
         return "{\"status\":\"ok\"}";
+    }
+
+    @GetMapping("getTempetureJSON")
+    @ResponseBody
+    public String getTempetureJSON() {
+        StringBuilder response = new StringBuilder();
+        ObjectMapper jsonMapper = new ObjectMapper();
+        ObjectNode rootNode = jsonMapper.createObjectNode();
+        ArrayNode rootArray = rootNode.putArray("tempetureValues");
+        Iterable<TempSensorValue> tempDates = tempSensorValueRepository.get500FirstByDate();
+        double tMax = 0, tMin = 300;
+        for(TempSensorValue tempDate: tempDates) {
+            ObjectNode tempElement = rootArray.addObject();
+            tempElement.put("temp", tempDate.getTempeture());
+            tempElement.put("press", tempDate.getPressure());
+            tempElement.put("hum", tempDate.getHumidity());
+            if (tempDate.getTempeture() > tMax) {
+                tMax = tempDate.getTempeture();
+            }
+            if (tempDate.getTempeture() < tMin) {
+                tMin = tempDate.getTempeture();
+            }
+        }
+        ObjectNode rangeNode = rootNode.putObject("range");
+        rangeNode.put("tMax", tMax);
+        rangeNode.put("tMin", tMin);
+        try {
+            return jsonMapper.writeValueAsString(rootNode);
+        } catch (JsonProcessingException e) {
+            return "{\"error\": \"ok\"}";
+        }
     }
 
 }

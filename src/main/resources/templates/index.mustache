@@ -40,9 +40,9 @@
 </div>
 <div class="rootdiv">
     <b>Внутри</b><br>
-    Температура: {{tempeture}}<br>
-    Давление: {{pressure}}<br>
-    Влажность: {{humidity}}<br>
+    <input id="checkT" onclick="fillTempetureCanvas()" type="checkbox" checked="true">Температура: {{tempeture}}<br>
+    <input id="checkP" onclick="fillTempetureCanvas()" type="checkbox">Давление: {{pressure}}<br>
+    <input id="checkH" onclick="fillTempetureCanvas()" type="checkbox">Влажность: {{humidity}}<br>
     <canvas id="tSensorCanvas" onclick="fillTempetureCanvas()" width="300" height="200" title=""></canvas>
 </div>
 <div class="rootdiv">

@@ -189,7 +189,7 @@ public class RequestController {
         ObjectNode rootNode = jsonMapper.createObjectNode();
         ArrayNode rootArray = rootNode.putArray("tempetureValues");
         Iterable<TempSensorValue> tempDates = tempSensorValueRepository.get500FirstByDate();
-        double tMax = 0, tMin = 300;
+        double tMax = 0, tMin = 300, hMin = 100, hMax = 0, pMin = 1000, pMax = 0;
         for(TempSensorValue tempDate: tempDates) {
             ObjectNode tempElement = rootArray.addObject();
             tempElement.put("temp", tempDate.getTempeture());
@@ -201,10 +201,26 @@ public class RequestController {
             if (tempDate.getTempeture() < tMin) {
                 tMin = tempDate.getTempeture();
             }
+            if (tempDate.getPressure() > pMax) {
+                pMax = tempDate.getPressure();
+            }
+            if (tempDate.getPressure() < pMin) {
+                pMin = tempDate.getPressure();
+            }
+            if (tempDate.getHumidity() > hMax) {
+                hMax = tempDate.getHumidity();
+            }
+            if (tempDate.getHumidity() < hMin) {
+                hMin = tempDate.getHumidity();
+            }
         }
         ObjectNode rangeNode = rootNode.putObject("range");
         rangeNode.put("tMax", tMax);
         rangeNode.put("tMin", tMin);
+        rangeNode.put("pMax", pMax);
+        rangeNode.put("pMin", pMin);
+        rangeNode.put("hMax", hMax);
+        rangeNode.put("hMin", hMin);
         try {
             return jsonMapper.writeValueAsString(rootNode);
         } catch (JsonProcessingException e) {

@@ -70,14 +70,41 @@
               if(xmlhttp.status == 200) { // Сервер вернул код 200 (что хорошо)
                 var JSONresponseObj = JSON.parse(xmlhttp.responseText);
                 var canvas_context = element.getContext("2d");
-                canvas_context.lineWidth="3";
-                canvas_context.strokeStyle="green";
-                var rangeTemp = JSONresponseObj.range.tMax - JSONresponseObj.range.tMin
-                JSONresponseObj.tempetureValues.forEach(function(item, i, arr) {
-                    canvas_context.lineTo(i, 200 - 200*(item.temp-JSONresponseObj.range.tMin)/rangeTemp);
-                });
-                element.title = "T: " + JSONresponseObj.range.tMin + " - " + JSONresponseObj.range.tMax
-                canvas_context.stroke();
+                if (document.getElementById("checkT").checked) {
+                    canvas_context.beginPath();
+                    canvas_context.lineWidth="3";
+                    canvas_context.strokeStyle="red";
+                    var rangeTemp = JSONresponseObj.range.tMax - JSONresponseObj.range.tMin
+                    JSONresponseObj.tempetureValues.forEach(function(item, i, arr) {
+                        canvas_context.lineTo(i, 200 - 200*(item.temp-JSONresponseObj.range.tMin)/rangeTemp);
+                    });
+                    canvas_context.stroke();
+                }
+                if (document.getElementById("checkH").checked) {
+                    canvas_context.beginPath();
+                    canvas_context.strokeStyle="blue";
+                    canvas_context.lineWidth="3";
+                    canvas_context.moveTo(0,JSONresponseObj.tempetureValues[0].hum);
+                    var rangeHum = JSONresponseObj.range.hMax - JSONresponseObj.range.hMin
+                    JSONresponseObj.tempetureValues.forEach(function(item, i, arr) {
+                        canvas_context.lineTo(i, 200 - 200*(item.hum-JSONresponseObj.range.hMin)/rangeHum);
+                    });
+                    canvas_context.stroke();
+                }
+                if (document.getElementById("checkP").checked) {
+                    canvas_context.beginPath();
+                    canvas_context.strokeStyle="green";
+                    canvas_context.lineWidth="3";
+                    canvas_context.moveTo(0,JSONresponseObj.tempetureValues[0].press)
+                    var rangePres = JSONresponseObj.range.pMax - JSONresponseObj.range.pMin
+                    JSONresponseObj.tempetureValues.forEach(function(item, i, arr) {
+                        canvas_context.lineTo(i, 200 - 200*(item.press-JSONresponseObj.range.pMin)/rangePres);
+                    });
+                    element.title = "T: " + JSONresponseObj.range.tMin + " - " + JSONresponseObj.range.tMax +
+                                    " H: " + JSONresponseObj.range.hMin + " - " + JSONresponseObj.range.hMax +
+                                    " P: " + JSONresponseObj.range.pMin + " - " + JSONresponseObj.range.pMax
+                    canvas_context.stroke();
+                }
               }
             }
           };

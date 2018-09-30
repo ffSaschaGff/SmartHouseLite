@@ -100,11 +100,11 @@
                     JSONresponseObj.tempetureValues.forEach(function(item, i, arr) {
                         canvas_context.lineTo(i, 200 - 200*(item.press-JSONresponseObj.range.pMin)/rangePres);
                     });
-                    element.title = "T: " + JSONresponseObj.range.tMin + " - " + JSONresponseObj.range.tMax +
-                                    " H: " + JSONresponseObj.range.hMin + " - " + JSONresponseObj.range.hMax +
-                                    " P: " + JSONresponseObj.range.pMin + " - " + JSONresponseObj.range.pMax
                     canvas_context.stroke();
                 }
+                element.title = "T: " + JSONresponseObj.range.tMin + " - " + JSONresponseObj.range.tMax +
+                                                    " H: " + JSONresponseObj.range.hMin + " - " + JSONresponseObj.range.hMax +
+                                                    " P: " + JSONresponseObj.range.pMin + " - " + JSONresponseObj.range.pMax
               }
             }
           };
